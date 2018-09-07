@@ -2,11 +2,18 @@ package chisw.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class ApplicationManager {
+import java.io.File;
+
+public class  ApplicationManager {
 
     WebDriver driver;
     private String browser;
@@ -22,19 +29,22 @@ public class ApplicationManager {
     public void init() {
 
         if (browser.equals(BrowserType.FIREFOX)) {
-            System.setProperty("webdriver.gecko.driver", "c:\\Tools\\geckodriver.exe");
-            driver = new FirefoxDriver();
+            FirefoxOptions options = new FirefoxOptions();
+            options.setCapability("locationContextEnabled", "false");
+            driver = new FirefoxDriver(options);
         } else if (browser.equals(BrowserType.CHROME)) {
-            System.setProperty("webdriver.chrome.driver", "c:\\Tools\\chromedriver.exe");
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.setCapability("unexpectedAlertBehaviour", "dismiss");
+            driver = new ChromeDriver(options);
         } else if (browser.equals(BrowserType.EDGE)) {
-            System.setProperty("webdriver.edge.driver", "c:\\Tools\\MicrosoftWebDriver.exe");
-            driver = new EdgeDriver();
+            EdgeOptions options = new EdgeOptions();
+            options.setCapability("unexpectedAlertBehaviour", "dismiss");
+            driver = new EdgeDriver(options);
         }
         mainPage = new MainPageHelper(driver);
         resultPage = new ResultPageHelper(driver);
         navigationHelper = new NavigationHelper(driver);
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
     }
 
     public void stop() {

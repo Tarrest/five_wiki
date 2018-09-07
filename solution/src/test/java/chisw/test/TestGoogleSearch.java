@@ -23,7 +23,6 @@ public class TestGoogleSearch extends TestBase {
     public void checkGoogleSearch(String searchQuery) {
         app.goTo().openWebsite("http://www.google.com.ua");
         app.getMainPage().fillSearchRequest(searchQuery);
-        app.getMainPage().runSearch();
         List<String> results = app.getResultPage().getSearchResultsList();
         Assert.assertTrue(results.toString().contains("wikipedia.org"), "wikipedia.org не содерджится в первой 5ке");
     }

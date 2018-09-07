@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.openqa.selenium.remote.BrowserType;
 public class TestBase {
 
-    protected final static ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+    protected final static ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
     @BeforeMethod
     public void setUp() throws Exception {
